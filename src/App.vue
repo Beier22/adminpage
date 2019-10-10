@@ -2,10 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/createpizza">Create Pizza</router-link> |
-      <router-link to="/createfastfood">Create Fastfood</router-link> |
-      <router-link to="/createdrink">Create Drink</router-link> |
-      <router-link to="/delete">Delete Item</router-link>
+      <router-link to="/create">Create</router-link> |
+      <router-link to="/delete">Delete</router-link>
     </div>
     <router-view/>
   </div>

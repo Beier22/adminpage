@@ -3,20 +3,18 @@
     <div>
         <component-to-re-render :key="componentKey" />
         <h1>Delete Item</h1>
-        <ul style="list-style: none">
             <h2>Pizzas</h2>
-            <li v-for="pizza in pizzas" v-bind:key="pizza.id">
+            <li v-for="pizza in pizzas" v-bind:key="pizza.id" style="list-style: none">
                 <button v-on:click="deletePizza(pizza)">{{pizza.name}}</button>
             </li>
             <h2>Fastfoods</h2>
-            <li v-for="fastfood in fastfoods" v-bind:key="fastfood.id">
+            <li v-for="fastfood in fastfoods" v-bind:key="fastfood.id" style="list-style: none">
                 <button v-on:click="deleteFastfood(fastfood)">{{fastfood.name}}</button>
             </li>
             <h2>Drinks</h2>
-            <li v-for="drink in drinks" v-bind:key="drink.id">
+            <li v-for="drink in drinks" v-bind:key="drink.id" style="list-style: none">
                 <button v-on:click="deleteDrink(drink)">{{drink.name}}</button>
             </li>
-        </ul>
         <h3>{{message}}</h3>
     </div>
 </template>
@@ -37,9 +35,6 @@
             }
         },
         methods:{
-            forceRerender(){
-                this.componentKey += 1;
-            },
             getAllItems(){
                 axios.get("https://pizzashop00.azurewebsites.net/api/pizzas").then(result => this.pizzas = result.data),
                 axios.get("https://pizzashop00.azurewebsites.net/api/fastfoods").then(result => this.fastfoods = result.data),
