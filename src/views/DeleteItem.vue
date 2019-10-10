@@ -1,5 +1,7 @@
 <template>
+
     <div>
+        <component-to-re-render :key="componentKey" />
         <h1>Delete Item</h1>
         <ul style="list-style: none">
             <h2>Pizzas</h2>
@@ -8,11 +10,11 @@
             </li>
             <h2>Fastfoods</h2>
             <li v-for="fastfood in fastfoods" v-bind:key="fastfood.id">
-                <button>{{fastfood.name}}</button>
+                <button v-on:click="deleteFastfood(fastfood)">{{fastfood.name}}</button>
             </li>
             <h2>Drinks</h2>
             <li v-for="drink in drinks" v-bind:key="drink.id">
-                <button>{{drink.name}}</button>
+                <button v-on:click="deleteDrink(drink)">{{drink.name}}</button>
             </li>
         </ul>
         <h3>{{message}}</h3>
@@ -21,6 +23,9 @@
 
 <script>
     import axios from 'axios'
+    import Vue from 'vue'
+
+
     export default {
         name: "DeleteItem",
         data () {
@@ -28,10 +33,14 @@
                 pizzas: [],
                 fastfoods: [],
                 drinks: [],
-                message: ''
+                message: '',
+                componentKey: 0
             }
         },
         methods:{
+            forceRerender(){
+                this.componentKey += 1;
+            },
             getAllItems(){
                 axios.get("https://pizzashop00.azurewebsites.net/api/pizzas").then(result => this.pizzas = result.data),
                 axios.get("https://pizzashop00.azurewebsites.net/api/fastfoods").then(result => this.fastfoods = result.data),
@@ -40,12 +49,22 @@
             deletePizza(p){
                 axios.delete("https://pizzashop00.azurewebsites.net/api/pizzas/" + p.id)
                     .then(this.message = 'Deleted ' + p.name)
+                    .catch(error => this.message = 'Something went wrong')
+                    .finally(()=>axios.get("https://pizzashop00.azurewebsites.net/api/pizzas").then(result => this.pizzas = result.data))
+
+
             },
             deleteFastfood(f){
                 axios.delete("https://pizzashop00.azurewebsites.net/api/fastfoods/" + f.id)
+                    .then(this.message = 'Deleted ' + f.name)
+                    .catch(error => this.message = 'Something went wrong')
+                    .finally(()=>axios.get("https://pizzashop00.azurewebsites.net/api/fastfoods").then(result => this.fastfoods = result.data))
             },
             deleteDrink(d){
                 axios.delete("https://pizzashop00.azurewebsites.net/api/drinks/" + d.id)
+                    .then(this.message = 'Deleted ' + d.name)
+                    .catch(error => this.message = 'Something went wrong')
+                    .finally(()=>axios.get("https://pizzashop00.azurewebsites.net/api/drinks").then(result => this.drinks = result.data))
             }
         },
         mounted(){

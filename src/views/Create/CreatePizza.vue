@@ -8,6 +8,7 @@
             <p><textarea v-model="toppings" placeholder="Description of toppings"/></p>
         </div>
         <p><button v-on:click="submit()">Submit</button></p>
+        <h3>{{message}}</h3>
     </div>
 </template>
 
@@ -20,7 +21,8 @@
                 name: '',
                 normalPrice: null,
                 familyPrice: null,
-                toppings: ''
+                toppings: '',
+                message: ''
             }
         },
         methods:{
@@ -34,6 +36,8 @@
                     familyPrice: this.familyPrice,
                     toppings: this.toppings
                 })
+                    .then(this.message = this.name + ' created')
+                    .catch(error => this.message = 'Something went wrong')
 
             }
         }

@@ -29,7 +29,9 @@
                     name: this.name,
                     smallPrice: this.smallPrice,
                     largePrice: this.largePrice
-                }).then(this.message = this.name + ' created')
+                })
+                    .then(this.message = this.name + ' created')
+                    .catch(error => this.message = 'Something went wrong')
             }
         }
     }
