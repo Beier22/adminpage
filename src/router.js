@@ -54,7 +54,7 @@ export default new Router({
         {
             path: '/editdrink/:id',
             name: 'editdrink',
-            component: EditFastfood
+            component: EditDrink
         },
         {
             path: '/delete',

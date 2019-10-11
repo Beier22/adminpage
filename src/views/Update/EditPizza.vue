@@ -23,7 +23,7 @@
                 normalPrice: 0,
                 familyPrice: 0,
                 toppings: '',
-                message: 'nothing'
+                message: ''
             }
         },
         mounted(){
@@ -47,8 +47,9 @@
                     normalPrice: this.normalPrice,
                     familyPrice: this.familyPrice,
                     toppings: this.toppings
-                    }
-                )
+                    })
+                    .then(this.message = this.name + ' has been updated')
+                    .catch(error => this.message = 'Something went wrong')
             }
         }
     }
