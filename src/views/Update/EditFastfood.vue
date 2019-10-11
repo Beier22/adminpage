@@ -45,6 +45,8 @@
                         largePrice: this.largePrice
                     }
                 )
+                    .then(this.message = this.name + ' has been updated')
+                    .catch(error => this.message = 'Something went wrong')  
             }
         }
     }
